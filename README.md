@@ -10,7 +10,7 @@ This README provides detailed setup instructions, API documentation, and explana
 
 Before starting, ensure you have the following installed:
 
-- PHP (>= 8.1)
+- PHP (>= 8.2)
 - Composer
 - MySQL (or any other supported database)
 - Redis (for caching)
@@ -23,7 +23,7 @@ Before starting, ensure you have the following installed:
    git clone <repository-url>
 
    ```bash
-   cd local-events-platform
+   cd weather-app
 
    ```bash
    composer install
@@ -33,7 +33,13 @@ Before starting, ensure you have the following installed:
    php artisan key:generate
 
    php artisan serve
+    
+    install jwt and the key into env file
+    ```bash
 
+### Installation openweathermap Steps
+    Please create an account on https://openweathermap.org/ and generate the token. Then, place the token into the .env file under the variables WEATHER_BASE_URL and WEATHER_API_KEY.
+    For further information, please refer to the documentation available at https://openweathermap.org/api/statistics-api.
 
    # API Documentation
 
@@ -53,6 +59,14 @@ Before starting, ensure you have the following installed:
 - Request Body: JSON object with email and password fields
 - Response: JSON object with authentication token
 
+### Home:
+
+- Method: get
+- Endpoint: /api/login
+- Request Body: -
+- Authorization: Bearer token with Admin role
+- Response: JSON object with user detail
+
 ### Logout:
 
 - Method: POST
@@ -66,21 +80,21 @@ Before starting, ensure you have the following installed:
 
 - **Create an event:**
   - Method: POST
-  - Endpoint: /api/admin/events
+  - Endpoint: /api/admin/event
   - Authorization: Bearer token with Admin role
   - Request Body: JSON object with event details (name, description, date, location)
   - Response: JSON object with created event details
 
 - **Update an event:**
   - Method: PUT
-  - Endpoint: /api/admin/events/{id}
+  - Endpoint: /api/admin/event/{id}
   - Authorization: Bearer token with Admin role
   - Request Body: JSON object with updated event details
   - Response: JSON object with updated event details
 
 - **Delete an event:**
   - Method: DELETE
-  - Endpoint: /api/admin/events/{id}
+  - Endpoint: /api/admin/event/{id}
   - Authorization: Bearer token with Admin role
   - Response: JSON object with delete confirmation message
 
@@ -89,12 +103,6 @@ Before starting, ensure you have the following installed:
   - Endpoint: /api/admin/events
   - Authorization: Bearer token with Admin role
   - Response: JSON array of event objects
-
-- **Get a single event:**
-  - Method: GET
-  - Endpoint: /api/admin/events/{id}
-  - Authorization: Bearer token with Admin role
-  - Response: JSON object with event details
 
 ## Buyer Routes
 
@@ -105,7 +113,7 @@ Before starting, ensure you have the following installed:
   - Endpoint: /api/buyer/events
   - Authorization: Bearer token with Buyer role
   - Query Parameters: name, date, location (optional)
-  - Response: JSON array of event objects matching the search criteria
+  - Response: JSON array of event objects matching the search criteria with average tempreture
 
 ## Role-Based Functionalities
 
