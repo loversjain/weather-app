@@ -34,9 +34,13 @@ Before starting, ensure you have the following installed:
 
    php artisan serve
     
-    install jwt
+    install jwt and the key into env file
     ```bash
-    
+
+### Installation openweathermap Steps
+    Please create an account on https://openweathermap.org/ and generate the token. Then, place the token into the .env file under the variables WEATHER_BASE_URL and WEATHER_API_KEY.
+    For further information, please refer to the documentation available at https://openweathermap.org/api/statistics-api.
+
    # API Documentation
 
 ## Authentication
