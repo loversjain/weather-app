@@ -10,7 +10,7 @@ This README provides detailed setup instructions, API documentation, and explana
 
 Before starting, ensure you have the following installed:
 
-- PHP (>= 8.1)
+- PHP (>= 8.2)
 - Composer
 - MySQL (or any other supported database)
 - Redis (for caching)
@@ -23,7 +23,7 @@ Before starting, ensure you have the following installed:
    git clone <repository-url>
 
    ```bash
-   cd local-events-platform
+   cd weather-app
 
    ```bash
    composer install
@@ -33,8 +33,10 @@ Before starting, ensure you have the following installed:
    php artisan key:generate
 
    php artisan serve
-
-
+    
+    install jwt
+    ```bash
+    
    # API Documentation
 
 ## Authentication
