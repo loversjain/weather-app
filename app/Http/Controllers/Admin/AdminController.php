@@ -71,7 +71,8 @@ class AdminController extends Controller
             }
             $validatedData = $request->validated();
             $event->update($validatedData);
-            return new EventResource($event);
+            return response()->json(['message' => 'Event updated successfully', 'data' => new EventResource($event)], 200);
+
         } catch (\Exception $e) {
             Log::error('Failed to update event: ' , ["error" => $e->getMessage(), "trace"=>$e->getTraceAsString()] );
             return response()->json(['message' => 'Failed to update event'], 500);
@@ -89,7 +90,7 @@ class AdminController extends Controller
     {
         try {
             // Find the event by its ID and soft delete it
-            $event = Event::find($id);
+            $event = Event::findOrFail($id);
             if(empty($event)) {
                 return response()->json(['message' => 'Event not found']);
             }
