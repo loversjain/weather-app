@@ -48,7 +48,7 @@ class AdminController extends Controller
         try {
             $validatedData = $request->validated();
             $event = Event::createEvent($validatedData);
-            return new EventResource($event);
+            return response()->json(['message' => 'Event created successfully', 'data' => new EventResource($event)], 201);
         } catch (\Exception $e) {
             Log::error('Failed to create event: ' , ["error" => $e->getMessage()] );
             return response()->json(['message' => 'Failed to create event', 'error' => $e->getMessage()], 500);
