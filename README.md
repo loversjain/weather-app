@@ -55,6 +55,14 @@ Before starting, ensure you have the following installed:
 - Request Body: JSON object with email and password fields
 - Response: JSON object with authentication token
 
+### Home:
+
+- Method: get
+- Endpoint: /api/login
+- Request Body: -
+- Authorization: Bearer token with Admin role
+- Response: JSON object with user detail
+
 ### Logout:
 
 - Method: POST
@@ -68,21 +76,21 @@ Before starting, ensure you have the following installed:
 
 - **Create an event:**
   - Method: POST
-  - Endpoint: /api/admin/events
+  - Endpoint: /api/admin/event
   - Authorization: Bearer token with Admin role
   - Request Body: JSON object with event details (name, description, date, location)
   - Response: JSON object with created event details
 
 - **Update an event:**
   - Method: PUT
-  - Endpoint: /api/admin/events/{id}
+  - Endpoint: /api/admin/event/{id}
   - Authorization: Bearer token with Admin role
   - Request Body: JSON object with updated event details
   - Response: JSON object with updated event details
 
 - **Delete an event:**
   - Method: DELETE
-  - Endpoint: /api/admin/events/{id}
+  - Endpoint: /api/admin/event/{id}
   - Authorization: Bearer token with Admin role
   - Response: JSON object with delete confirmation message
 
@@ -91,12 +99,6 @@ Before starting, ensure you have the following installed:
   - Endpoint: /api/admin/events
   - Authorization: Bearer token with Admin role
   - Response: JSON array of event objects
-
-- **Get a single event:**
-  - Method: GET
-  - Endpoint: /api/admin/events/{id}
-  - Authorization: Bearer token with Admin role
-  - Response: JSON object with event details
 
 ## Buyer Routes
 
@@ -107,7 +109,7 @@ Before starting, ensure you have the following installed:
   - Endpoint: /api/buyer/events
   - Authorization: Bearer token with Buyer role
   - Query Parameters: name, date, location (optional)
-  - Response: JSON array of event objects matching the search criteria
+  - Response: JSON array of event objects matching the search criteria with average tempreture
 
 ## Role-Based Functionalities
 
