@@ -37,16 +37,13 @@ class EventController extends Controller
     public function getWeather(Request $request)
     {
         // Securely retrieve city and date from the request
-        $city = $request->input('city'); 
-        $date = Carbon::parse($request->input('date'))->format('Y-m-d'); 
-        
+        $city = $request->input('city');
+        $date = Carbon::parse($request->input('date'))->format('Y-m-d');
+
         // Securely instantiate WeatherService
         $weatherService = app(WeatherService::class);
-        
+
         // Fetch weather data securely
-        $weatherData = $weatherService->getWeatherByCity($city, $date);
-        
-        return $weatherData;
-        // Handle weather data...
+        return $weatherService->getWeatherByCity($city, $date);
     }
 }

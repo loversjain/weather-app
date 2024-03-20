@@ -20,6 +20,7 @@ use Exception;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
+ * @method static findOrFail(int|string $id)
  */
 class Event extends Model
 {

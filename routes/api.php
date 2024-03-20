@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\AdminController as Admin;
+use App\Http\Controllers\Admin\AdminV1Controller as AdminV1;
 use App\Http\Controllers\Buyer\BuyerController as Buyer;
 // use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Auth;
@@ -45,6 +46,16 @@ Route::controller(Admin::class)
             Route::delete('/event/{id}', 'destroy')->where('id', '[0-9]+');
             Route::get('/events',  'index');
 });
+
+Route::controller(AdminV1::class)
+    ->prefix('admin/v1')
+    ->middleware(['auth:api', 'checkrole'])
+    ->group(function () {
+        Route::post('/event',  'store');
+        Route::put('/event/{id}', 'update')->where('id', '[0-9]+');
+        Route::delete('/event/{id}', 'destroy')->where('id', '[0-9]+');
+        Route::get('/events',  'index');
+    });
 
 Route::controller(Buyer::class)
        ->prefix('buyer')

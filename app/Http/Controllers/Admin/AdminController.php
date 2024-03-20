@@ -28,7 +28,7 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         try {
-            $perPage = $request->input('per_page', 15); 
+            $perPage = $request->input('per_page', 15);
             $events = Event::paginate($perPage);
             return EventResource::collection($events);
         } catch (\Exception $e) {
@@ -46,9 +46,9 @@ class AdminController extends Controller
     public function store(StoreEventRequest $request)
     {
         try {
-            $validatedData = $request->validated();
-            $event = Event::createEvent($validatedData);
-            return response()->json(['message' => 'Event created successfully', 'data' => new EventResource($event)], 201);
+            $event = Event::createEvent($request->all());
+            return response()
+                    ->json(['message' => 'Event created successfully', 'data' => new EventResource($event)], 201);
         } catch (\Exception $e) {
             Log::error('Failed to create event: ' , ["error" => $e->getMessage()] );
             return response()->json(['message' => 'Failed to create event', 'error' => $e->getMessage()], 500);
@@ -71,7 +71,8 @@ class AdminController extends Controller
             }
             $validatedData = $request->validated();
             $event->update($validatedData);
-            return response()->json(['message' => 'Event updated successfully', 'data' => new EventResource($event)], 200);
+            return response()
+                    ->json(['message' => 'Event updated successfully', 'data' => new EventResource($event)], 200);
 
         } catch (\Exception $e) {
             Log::error('Failed to update event: ' , ["error" => $e->getMessage(), "trace"=>$e->getTraceAsString()] );

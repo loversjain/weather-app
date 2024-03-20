@@ -2,25 +2,17 @@
 
 namespace App\Http\Requests\Admin;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Enums\ValidationEnum;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-/**
- * Class StoreEventRequest
- *
- * Request class for storing a new event.
- *
- * @package App\Http\Requests\Admin
- */
-class StoreEventRequest extends FormRequest
+class AdminV1Request extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -30,10 +22,10 @@ class StoreEventRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'name' => 'nullable|string|max:255',
+            'name' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date|date_format:Y-m-d',
             'location' => 'required|string|max:255',
@@ -47,7 +39,7 @@ class StoreEventRequest extends FormRequest
      * @return void
      * @throws HttpResponseException
      */
-    public function failedValidation(Validator $validator)
+    public function failedValidation(Validator $validator): void
     {
         throw new HttpResponseException(response()->json([
             'success'   => false,
@@ -57,23 +49,23 @@ class StoreEventRequest extends FormRequest
     }
 
     /**
-     * Get custom error messages for validator errors.
+     * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function messages()
+    public function messages(): array
     {
         return [
-            'name.nullable' => 'The :attribute field is required.',
-            'name.string' => 'The :attribute must be a string.',
+            'name.required' => ValidationEnum::REQUIRED_MESSAGE->value,
+            'name.string' => ValidationEnum::STRING_MESSAGE->value,
             'name.max' => 'The :attribute may not be greater than :max characters.',
-            'description.required' => 'The :attribute field is required.',
-            'description.string' => 'The :attribute must be a string.',
-            'date.required' => 'The :attribute field is required.',
+            'description.required' => ValidationEnum::REQUIRED_MESSAGE->value,
+            'description.string' => ValidationEnum::STRING_MESSAGE->value,
+            'date.required' => ValidationEnum::REQUIRED_MESSAGE->value,
             'date.date' => 'The :attribute must be a valid date.',
             'date.date_format' => 'The :attribute must be a YYYY-MM-DD format.',
-            'location.required' => 'The :attribute field is required.',
-            'location.string' => 'The :attribute must be a string.',
+            'location.required' => ValidationEnum::REQUIRED_MESSAGE->value,
+            'location.string' => ValidationEnum::STRING_MESSAGE->value,
             'location.max' => 'The :attribute may not be greater than :max characters.',
         ];
     }

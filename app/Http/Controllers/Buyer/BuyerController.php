@@ -33,17 +33,18 @@ class BuyerController extends Controller
      * Search for events based on provided filters.
      *
      * @param Request $request The incoming HTTP request.
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Contracts\Routing\ResponseFactory Returns JSON response with event data or error message.
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Contracts\Routing\ResponseFactory
+     * Returns JSON response with event data or error message.
      */
     public function index(Request $request)
     {
         try {
             // Extract filters from the request
             $filters = $request->only(['name', 'date', 'location']);
-            
+
             // Perform event search based on filters
             $events = $this->eventSearchService->search($filters);
-            
+
             // Return resource collection if events found
             return BuyerEventResource::collection($events);
         } catch (\Exception $e) {

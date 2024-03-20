@@ -21,8 +21,6 @@ use Tymon\JWTAuth\Facades\JWTAuth;
  */
 class AuthController extends Controller
 {
-    //const FILE_PATH = __FILE__ . '/' . __FUNCTION__;
-
     /**
      * Register a new user.
      *
@@ -45,7 +43,8 @@ class AuthController extends Controller
                 return response()->json(['message' => 'Registration Unsuccessful!'], 400);
             }
         } catch (\Exception $exception) {
-            Log::error("Unexpected error during registration", ['error' => $exception->getMessage(), 'trace' => $exception->getTraceAsString()]);
+            Log::error("Unexpected error during registration",
+                ['error' => $exception->getMessage(), 'trace' => $exception->getTraceAsString()]);
             return response()->json(['message' => 'Unexpected error during registration'], 500);
         }
     }

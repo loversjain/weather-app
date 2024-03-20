@@ -11,6 +11,6 @@
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<h1>Welcome Weather App</h1>
+<h1>Welcome <h1>Weather</h1> App</h1>
 </body>
 </html>
