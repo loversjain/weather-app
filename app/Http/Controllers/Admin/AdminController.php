@@ -46,7 +46,8 @@ class AdminController extends Controller
     public function store(StoreEventRequest $request)
     {
         try {
-            $event = Event::createEvent($request->all());
+            $validatedData = $request->validated();
+            $event = Event::createEvent($validatedData);
             return response()
                     ->json(['message' => 'Event created successfully', 'data' => new EventResource($event)], 201);
         } catch (\Exception $e) {
